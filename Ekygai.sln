@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{12BC992F-72CA-42E2-9D3D-32794B6D5A67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2EE26231-8588-417B-A8AC-6FFF122913ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F1F052EF-A3E7-4BCD-A91A-F445DDF7880C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{3C897E4A-6534-41E1-B987-8D96119EFE22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekygai.API", "src\API\Ekygai.API\Ekygai.API.csproj", "{9C9319F7-632B-48AF-AAF1-A950458E6842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekygai.Application", "src\Core\Ekygai.Application\Ekygai.Application.csproj", "{9F544EE2-409E-49A3-957D-A6EA9C2D991D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekygai.Domain", "src\Core\Ekygai.Domain\Ekygai.Domain.csproj", "{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekygai.Infrastructure", "src\Infrastructure\Ekygai.Infrastructure\Ekygai.Infrastructure.csproj", "{77CDD23F-F129-40BE-B3D5-CA9999F770E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C9319F7-632B-48AF-AAF1-A950458E6842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9319F7-632B-48AF-AAF1-A950458E6842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9319F7-632B-48AF-AAF1-A950458E6842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9319F7-632B-48AF-AAF1-A950458E6842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F544EE2-409E-49A3-957D-A6EA9C2D991D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F544EE2-409E-49A3-957D-A6EA9C2D991D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F544EE2-409E-49A3-957D-A6EA9C2D991D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F544EE2-409E-49A3-957D-A6EA9C2D991D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CDD23F-F129-40BE-B3D5-CA9999F770E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CDD23F-F129-40BE-B3D5-CA9999F770E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CDD23F-F129-40BE-B3D5-CA9999F770E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CDD23F-F129-40BE-B3D5-CA9999F770E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2EE26231-8588-417B-A8AC-6FFF122913ED} = {12BC992F-72CA-42E2-9D3D-32794B6D5A67}
+		{F1F052EF-A3E7-4BCD-A91A-F445DDF7880C} = {12BC992F-72CA-42E2-9D3D-32794B6D5A67}
+		{3C897E4A-6534-41E1-B987-8D96119EFE22} = {12BC992F-72CA-42E2-9D3D-32794B6D5A67}
+		{9C9319F7-632B-48AF-AAF1-A950458E6842} = {3C897E4A-6534-41E1-B987-8D96119EFE22}
+		{9F544EE2-409E-49A3-957D-A6EA9C2D991D} = {2EE26231-8588-417B-A8AC-6FFF122913ED}
+		{33FDC664-40AC-4E22-9ACD-FD7FA1400C4D} = {2EE26231-8588-417B-A8AC-6FFF122913ED}
+		{77CDD23F-F129-40BE-B3D5-CA9999F770E3} = {F1F052EF-A3E7-4BCD-A91A-F445DDF7880C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E4345CD-9FB9-429E-B178-D07B546035EB}
+	EndGlobalSection
+EndGlobal

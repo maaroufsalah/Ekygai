@@ -1,0 +1,6 @@
+@Ekygai.API_HostAddress = http://localhost:5222
+
+GET {{Ekygai.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

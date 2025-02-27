@@ -1,0 +1,62 @@
+# ─────────────────────────────────────────────────────────────
+# Node / Next.js
+# ─────────────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+.next/cache/
+.next/standalone/
+
+# Build outputs
+build/
+dist/
+
+# Testing
+coverage/
+.jest/
+.nyc_output/
+
+# Logs & Debugging
+*.log
+*.log.gz
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.debug.log
+logs/
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment Variables
+.env*
+!.env.example
+
+# ─────────────────────────────────────────────────────────────
+# .NET / Visual Studio
+# ─────────────────────────────────────────────────────────────
+bin/
+obj/
+.vs/
+# (Do NOT ignore *.sln if you want your solution file in Git)
+
+# ─────────────────────────────────────────────────────────────
+# IDE / Editor
+# ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.swp
+*.swo
+*.bak
+
+# ─────────────────────────────────────────────────────────────
+# OS-specific
+# ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini

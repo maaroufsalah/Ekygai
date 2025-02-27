@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: ekygai-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-mydatabase}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - ekygai-network
+
+  api:
+    build:
+      context: .
+      dockerfile: ./src/API/Ekygai.API/Dockerfile.api
+    container_name: ekygai-api
+    ports:
+      - "5000:80"  # Host:5000 -> Container:80
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection:-Host=db;Port=5432;Database=mydatabase;Username=postgres;Password=postgres}
+    depends_on:
+      - db
+    networks:
+      - ekygai-network
+
+  frontend:
+    build:
+      context: ./frontend/web-app
+      dockerfile: Dockerfile.nextjs
+    container_name: ekygai-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # Use Docker's internal DNS "api" + port 80, plus /api/ path
+      - NEXT_PUBLIC_API_URL=http://api:80/api/
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-dev-secret}
+      - NODE_ENV=${NODE_ENV:-development}
+    depends_on:
+      - api
+    networks:
+      - ekygai-network
+
+networks:
+  ekygai-network:
+
+volumes:
+  postgres-data:
