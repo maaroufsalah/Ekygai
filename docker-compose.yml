@@ -40,7 +40,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend/web-app
       dockerfile: Dockerfile
     container_name: ekygai-frontend
     restart: always
