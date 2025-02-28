@@ -9,7 +9,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policyBuilder =>
     {
         // Adjust as needed: if your frontend is on http://localhost:3000, specify that
-        policyBuilder.WithOrigins("http://localhost:3000")
+        policyBuilder.WithOrigins("http://localhost:3000", "https://ekygai-bv6cw.ondigitalocean.app")
                      .AllowAnyMethod()
                      .AllowAnyHeader()
                      .AllowCredentials(); // If you need cookies/auth headers
