@@ -29,5 +29,8 @@ EXPOSE 3000
 # Instruct Next.js to listen on port 3000
 ENV PORT=3000
 
-# Start Next.js in production mode
-CMD ["npm", "start"]
+# Changed this line to print environment variables before starting
+# Print environment variables at container startup (for debugging)
+CMD echo "Runtime environment variables:" && \
+    printenv | grep NEXT && \
+    npm start
