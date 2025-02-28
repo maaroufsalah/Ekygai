@@ -1,4 +1,6 @@
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+import { getApiUrl } from "./apiConfig";
+
+const baseUrl = getApiUrl();
 
 async function get(url: string) {
     const requestOptions = {

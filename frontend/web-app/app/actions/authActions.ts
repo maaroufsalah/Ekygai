@@ -1,5 +1,3 @@
-// 'use server';
-
 import { authOptions } from "@/auth"; // ✅ Ensure correct import
 import { fetchWrapper } from "../lib/fetchWrapper";
 import { UserRegisterDto } from "../types";

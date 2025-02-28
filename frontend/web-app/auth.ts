@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getApiUrl } from "./app/lib/apiConfig";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -16,7 +17,9 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials) return null;
                 // Make your login request to your API
                 console.log("credentials : ", credentials);
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+                const baseUrl = getApiUrl();
+                console.log("baseUrl : ", baseUrl);
+                const res = await fetch(`${baseUrl}auth/login`, {
                     method: "POST",
                     body: JSON.stringify(credentials),
                     headers: { "Content-Type": "application/json" },
