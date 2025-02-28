@@ -1,51 +1,54 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:16
     container_name: ekygai-db
+    restart: always
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
+    env_file:
+      - .env.local
     environment:
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - POSTGRES_DB=${POSTGRES_DB:-mydatabase}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - ekygai-network
 
-  api:
+  app:
     build:
       context: .
-      dockerfile: ./src/API/Ekygai.API/Dockerfile
-    container_name: ekygai-api
+      dockerfile: Dockerfile  # The combined Dockerfile
+    container_name: ekygai-app
+    restart: always
     ports:
-      - "5000:80"  # Host:5000 -> Container:80
+      - "${API_PORT:-5000}:80"         # Maps .NET API port 80 inside container → 5000 on host
+      - "${FRONTEND_PORT:-3000}:3000"  # Maps Next.js port 3000 inside container → 3000 on host
+    env_file:
+      - .env.local
     environment:
+      # .NET app base URL
       - ASPNETCORE_URLS=http://+:80
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
-      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection:-Host=db;Port=5432;Database=mydatabase;Username=postgres;Password=postgres}
+      # Environment
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      
+      # Dynamic DB connection
+      - ConnectionStrings__DefaultConnection=Host=${POSTGRES_HOST:-ekygai-db};Port=${POSTGRES_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+
+      # Next.js environment
+      - NODE_ENV=${NODE_ENV}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+      # JWT environment variables (for TokenKey, Issuer, Audience)
+      - JWTSettings__TokenKey=${JWT_TOKEN_KEY}
+      - JWTSettings__Issuer=${JWT_ISSUER}
+      - JWTSettings__Audience=${JWT_AUDIENCE}
+
     depends_on:
       - db
-    networks:
-      - ekygai-network
-
-  frontend:
-    build:
-      context: ./frontend/web-app
-      dockerfile: Dockerfile.nextjs
-    container_name: ekygai-frontend
-    ports:
-      - "3000:3000"
-    environment:
-      # Use Docker's internal DNS "api" + port 80, plus /api/ path
-      - NEXT_PUBLIC_API_URL=http://api:80/api/
-      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-dev-secret}
-      - NODE_ENV=${NODE_ENV:-development}
-    depends_on:
-      - api
     networks:
       - ekygai-network
 
