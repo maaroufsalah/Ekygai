@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
         policyBuilder
             .WithOrigins(
                 "http://localhost:3000",                    // Local development
-                "https://ekygai-bv6cw.ondigitalocean.app"   // Your actual production domain
+                "https://ekygay-front-sckjy.ondigitalocean.app"   // Your actual production domain
             )
             .AllowAnyMethod()
             .AllowAnyHeader()
