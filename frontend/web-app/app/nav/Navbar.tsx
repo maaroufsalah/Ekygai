@@ -15,7 +15,7 @@ export default function Navbar() {
         <header className="sticky top-0 z-50 flex justify-between bg-white p-5 items-center text-gray-800 shadow-md">
             <Logo />
 
-            <nav className="flex space-x-6 mx-auto">
+            {/* <nav className="flex space-x-6 mx-auto">
                 <Link href="/athletes" className="hover:text-blue-500 font-medium">
                     Performance
                 </Link>
@@ -25,8 +25,8 @@ export default function Navbar() {
                 <Link href="/dashboard" className="hover:text-blue-500 font-medium">
                     Dashboard
                 </Link>
-            </nav>
-
+            </nav> */}
+{/* 
             <div className="flex space-x-4 ml-auto">
                 {session?.user ? (
                     <UserActions user={session.user} />
@@ -36,7 +36,7 @@ export default function Navbar() {
                         <RegisterButton />
                     </>
                 )}
-            </div>
+            </div> */}
         </header>
     );
 }
