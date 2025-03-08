@@ -12,7 +12,7 @@ export default function HomePage() {
             Suivez, connectez et améliorez vos performances
           </h1>
           <p className="mt-4 text-lg md:text-xl">
-            Rejoignez des millions d'athlètes et de passionnés qui repoussent leurs limites.
+            Ekygai – Trouvez votre équilibre, atteignez l'excellence grâce à la science et l'IA
           </p>
           <div className="mt-6 flex justify-center space-x-4">
             <Link href="#">
