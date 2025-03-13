@@ -1,54 +1,99 @@
-import { StyleSheet } from "react-native";
-import { theme } from "../../../Theme/Theme";
-import { fontPixel, getHeightBasedDimension } from "../../../Utils/Responsive/Responsive";
+import { StyleSheet, Dimensions } from 'react-native';
+import Color from '../../../Utils/Constants/Color';
+import RFValue from '../../../Utils/Responsive/RFValue';
+
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.white,
-  },
-  titleView: {
-    paddingVertical: 10,
-    backgroundColor: theme.colors.white,
+    backgroundColor: Color.white
   },
   map: {
-    height: "100%",
-    width: "100%",
-    resizeMode: "stretch",
+    ...StyleSheet.absoluteFillObject,
   },
-  flexPositionView: {
-    position: "absolute",
-    height: 100,
-    width: "100%",
-    bottom: -25,
-    paddingHorizontal: 35,
-    flexDirection: "row",
-    justifyContent: "space-between",
+  mapContainer: {
+    width: width,
+    height: height * 0.6,
+    position: 'relative',
   },
-  blackBox: {
-    backgroundColor: theme.colors.Rich_Black,
-    height: 73,
-    width: 95,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
+  titleView: {
+    backgroundColor: Color.white,
+    paddingVertical: RFValue(10)
+  },
+  titleText: {
+    fontSize: RFValue(17),
+    fontWeight: '600',
+    color: Color.Rich_Black,
+    textAlign: 'center'
   },
   roundView: {
-    backgroundColor: "#FF5757",
-    height: 85,
-    borderRadius: 200,
-    width: 85,
-    justifyContent: "center",
-    alignItems: "center",
+    width: width * 0.3,
+    height: width * 0.3,
+    borderRadius: (width * 0.3) / 2,
+    backgroundColor: Color.lime_green,
     position: 'absolute',
-    bottom: getHeightBasedDimension() / 18,
-    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: RFValue(120),
+    right: RFValue(20),
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
-  countText : {
-    fontSize: fontPixel(20),
-    marginTop: -5,
+  flexPositionView: {
+    flexDirection: 'row',
+    width: width,
+    justifyContent: 'space-around',
+    position: 'absolute',
+    bottom: RFValue(20)
   },
-  countTitleText : {
-    fontSize: fontPixel(14),
+  blackBox: {
+    width: width * 0.45,
+    height: RFValue(80),
+    backgroundColor: Color.Rich_Black,
+    borderRadius: RFValue(10),
+    justifyContent: 'center',
+    paddingHorizontal: RFValue(10),
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  countTitleText: {
+    fontSize: RFValue(13),
+    fontWeight: '500',
+  },
+  countText: {
+    fontSize: RFValue(24),
+    fontWeight: '700',
+    marginTop: RFValue(5)
+  },
+  fixTypeContainer: {
+    position: 'absolute',
+    top: RFValue(10),
+    right: RFValue(10),
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    paddingHorizontal: RFValue(10),
+    paddingVertical: RFValue(5),
+    borderRadius: RFValue(15),
+  },
+  // Add OpenStreetMap attribution styles (required by their license)
+  attribution: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 3,
+    zIndex: 100,
+  },
+  attributionText: {
+    fontSize: 10,
+    color: '#333',
   },
 });

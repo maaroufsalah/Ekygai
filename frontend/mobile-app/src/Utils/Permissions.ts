@@ -1,43 +1,64 @@
-import { Platform, PermissionsAndroid, Alert } from 'react-native';
+import { PermissionsAndroid, Platform, Alert } from 'react-native';
 
-/**
- * Requests location permission from the user
- * @returns Promise<boolean> True if permission is granted, false otherwise
- */
 export const requestLocationPermission = async (): Promise<boolean> => {
-  if (Platform.OS === 'ios') {
-    // For iOS, we'll use Geolocation.requestAuthorization() in the component
-    return true;
-  }
+  if (Platform.OS === 'android') {
+    try {
+      const grants = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      ]);
 
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: "Location Permission",
-        message:
-          "This app needs access to your location " +
-          "to track your activities.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
+      if (
+        grants[PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION] === PermissionsAndroid.RESULTS.GRANTED &&
+        grants[PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION] === PermissionsAndroid.RESULTS.GRANTED
+      ) {
+        console.log('[Permissions] Location permissions granted');
+        return true;
+      } else {
+        console.log('[Permissions] Location permissions denied');
+        Alert.alert(
+          'Location Permission Required',
+          'This app needs location permission to show your position on the map. Please grant location permission in app settings.',
+          [
+            { 
+              text: 'OK', 
+              onPress: () => console.log('OK Pressed')
+            }
+          ]
+        );
+        return false;
       }
-    );
-    
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("Location permission granted");
-      return true;
-    } else {
-      console.log("Location permission denied");
-      Alert.alert(
-        "Permission Required",
-        "Location permission is required for tracking. Please enable it in your device settings.",
-        [{ text: "OK" }]
-      );
+    } catch (err) {
+      console.warn('[Permissions] Error requesting location permissions:', err);
       return false;
     }
-  } catch (err) {
-    console.warn(err);
-    return false;
+  } else if (Platform.OS === 'ios') {
+    // For iOS, Geolocation.requestAuthorization() is handled by the Geolocation module
+    return true;
   }
+  
+  return false;
+};
+
+export const checkLocationPermission = async (): Promise<boolean> => {
+  if (Platform.OS === 'android') {
+    try {
+      const fineLocation = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      );
+      const coarseLocation = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+      );
+
+      return fineLocation && coarseLocation;
+    } catch (err) {
+      console.warn('[Permissions] Error checking location permissions:', err);
+      return false;
+    }
+  } else if (Platform.OS === 'ios') {
+    // For iOS, we assume permissions are handled by the Geolocation module
+    return true;
+  }
+  
+  return false;
 };

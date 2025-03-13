@@ -22,6 +22,9 @@ target 'Aerofit' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+  
+  # Add the react-native-maps pod here
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
 
   target 'AerofitTests' do
     inherit! :complete

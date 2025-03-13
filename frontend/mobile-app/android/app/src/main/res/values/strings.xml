@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Aerofast</string>
+    <string name="map_attribution">© OpenStreetMap contributors</string>
 </resources>
