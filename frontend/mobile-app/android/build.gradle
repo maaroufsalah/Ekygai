@@ -6,6 +6,8 @@ buildscript {
         targetSdkVersion = 34
         ndkVersion = "26.1.10909125"
         kotlinVersion = "1.9.22"
+        playServicesVersion = "18.1.0" // Changed from 21.0.1 to 18.1.0
+        playServicesLocationVersion = "20.0.0" // Added separate version for location
     }
     repositories {
         google()

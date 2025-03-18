@@ -4,13 +4,12 @@ apply plugin: "com.facebook.react"
 
 // Add Kotlin version
 buildscript {
-    ext.kotlinVersion = "1.9.22"
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
     }
 }
 
@@ -20,6 +19,15 @@ react {
 
 def enableProguardInReleaseBuilds = false
 def jscFlavor = 'org.webkit:android-jsc:+'
+
+// Add the configurations block to force specific versions
+configurations.all {
+    resolutionStrategy {
+        force "com.google.android.gms:play-services-base:${rootProject.ext.playServicesVersion}"
+        force "com.google.android.gms:play-services-maps:${rootProject.ext.playServicesVersion}"
+        force "com.google.android.gms:play-services-location:${rootProject.ext.playServicesLocationVersion}"
+    }
+}
 
 android {
     ndkVersion rootProject.ext.ndkVersion
@@ -128,8 +136,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okio:okio:3.3.0'
 
-    // Location services
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    // Location services - use the ext variables
+    implementation "com.google.android.gms:play-services-base:${rootProject.ext.playServicesVersion}"
+    implementation "com.google.android.gms:play-services-maps:${rootProject.ext.playServicesVersion}"
+    implementation "com.google.android.gms:play-services-location:${rootProject.ext.playServicesLocationVersion}"
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
